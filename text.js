@@ -1,19 +1,16 @@
-var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database('newdb')
-var inquirer = require('inquirer')
-var request = require('request')
-var arr = process.argv.slice(2)
-//console.log(arr)
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('Database/newdb');
+var inquirer = require('inquirer');
+var request = require('request');
+var arr = process.argv.slice(2);
 function search (value) {
-  var newarr = []
+  var newarr = [];
   db.serialize(function () {
-// console.log("value =>", value)
-// value=toString(value)
-// db.run("CREATE TABLE IF NOT EXISTS contacts (name TEXT, phoneNumber INT UNIQUE)");
     var smt = db.prepare('SELECT name , phoneNumber FROM contacts WHERE name LIKE ?')
-
     smt.each(`%${value}%`, function (err, row) {
-      if (err) { console.log('name not found') }
+      if (err) {
+        console.log('name not found') 
+      }
       if (row) {
         newarr.push(row)
       }
@@ -26,11 +23,7 @@ function search (value) {
       } else {
         console.log(`you have more than one person named ${value} `)
         for (var i = 0; i < newarr.length; i++) {
-// console.log(newarr)
-// var arr2=[]
-// arr2.push(`${i}: ${newarr[i]['name']}`)
           console.log(`${i + 1}: ${newarr[i]['name']}`)
-// console.log(arr2)
         }
         inquirer.prompt([{
           type: 'input',
@@ -38,9 +31,9 @@ function search (value) {
           message: 'who do you want to send the message to ?',
           validate: function (value) {
             if (value > 0 && value <= newarr.length) {
-              return true
+              return true;
             } else {
-              return 'please enter valid value'
+              return 'please enter valid value';
             }
           }
 
@@ -62,7 +55,7 @@ function sendsms (number, message) {
       console.log('unexpected error occured')
     }
     if (response['body'] === 'OK 2.2') {
-      console.log(`sms sent succesfully to ${number}`)
+      console.log(`Message sent succesfully to ${number}`)
     } else {
       console.log('oops something went wrong some where please try again')
     }
@@ -70,7 +63,7 @@ function sendsms (number, message) {
 }
 var message = arr[2]
 if (!arr.length) {
-  console.log('enter text augument')
+  console.log('please include name and message')
   process.exit()
 } else if (arr.indexOf('-m') === -1) {
   console.log('please include -m tag')

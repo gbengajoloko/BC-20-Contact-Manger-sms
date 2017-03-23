@@ -1,7 +1,7 @@
 var arr = process.argv.slice(2);
 var chalk = require('chalk');
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('newdb');
+var db = new sqlite3.Database('Database/newdb');
 var colors = require('colors');
 function addContacts (fullName, number) {
   db.serialize(function () {
@@ -22,7 +22,7 @@ function addContacts (fullName, number) {
 var checkValidName = (/^[a-zA-Z0-9]+$/);
 var firstname = arr[1];
 var lastname = arr[2];
-var fullName
+var fullName;
 var checkValidNum = (/^[0-9]+$/);
 var number = arr[4];
 if (arr.indexOf('-n') === -1) {
@@ -33,7 +33,7 @@ if (arr.indexOf('-n') === -1) {
   process.exit();
 } else {
   if (checkValidName.test(firstname) && checkValidName.test(lastname)) {
-    fullName = firstname + ' ' + lastname
+    fullName = firstname + ' ' + lastname;
   } else {
     console.log('invalid character present in name');
   }
