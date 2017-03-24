@@ -1,5 +1,5 @@
 var Table = require('easy-table')
- 
+var chalk = require('chalk');
 var data = [
   { id: 'When using for the first time', desc: 'npm install'},
   { id: 'To add contact', desc: 'node add -n <name> -p <phone number>'},
@@ -18,4 +18,4 @@ data.forEach(function(product) {
   t.newRow()
 })
  
-console.log(t.toString())
+console.log(chalk.red.bold(t.toString()))

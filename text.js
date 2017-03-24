@@ -2,6 +2,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('Database/newdb');
 var inquirer = require('inquirer');
 var request = require('request');
+var chalk = require('chalk');
 var arr = process.argv.slice(2);
 function search (value) {
   var newarr = [];
@@ -55,7 +56,7 @@ function sendsms (number, message) {
       console.log('unexpected error occured')
     }
     if (response['body'] === 'OK 2.2') {
-      console.log(`Message sent succesfully to ${number}`)
+      console.log(chalk.green.bold('Message sent succesfully'))
     } else {
       console.log('oops something went wrong some where please try again')
     }

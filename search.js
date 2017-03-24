@@ -18,7 +18,7 @@ function search (value) {
       if (newarr.length === 0) {
         console.log('Name does not exists in contact list') 
       } else if (newarr.length == 1) {
-        console.log(`the phonenumber is: ${newarr[0]['phoneNumber']}`);
+        console.log(chalk.bold.green(`the phonenumber is: ${newarr[0]['phoneNumber']}`));
       } else {
         console.log(chalk.bold.red(`you have more than one person named ${value} in your contact list`))
         for (var i = 0; i < newarr.length; i++) {
@@ -38,7 +38,7 @@ function search (value) {
             }
 
           }]).then(function (answers) {
-            console.log(chalk.yellow.red(`the phone number for ${newarr[answers['number'] - 1]['name']} is ${newarr[answers['number'] - 1]['phoneNumber']}`));
+            console.log(chalk.yellow.red(`${newarr[answers['number'] - 1]['name']} phone number is ${newarr[answers['number'] - 1]['phoneNumber']}`));
           })
       }
     }, 20)
@@ -49,7 +49,7 @@ if (arr.length > 2) {
   console.log('too many search parameters entereed');
   process.exit();
 } else if (!arr.length) {
-  console.log('no delete parameter entered');
+  console.log('no search parameter entered');
   process.exit();
 } else if (arr[0] && arr[1]) {
   var val = arr.join(' ');

@@ -9,9 +9,9 @@ function addContacts (fullName, number) {
     var stmt = db.prepare('INSERT INTO contacts VALUES (?,?)');
     stmt.run(fullName, number, function (err, row) {
       if (err) {
-        console.log(chalk.blue.bold('Phone number or contact name already exists in contact list'));
+        console.log(chalk.red.bold('Phone number or contact name already exists in contact list'));
       } else {
-        console.log('Contact added succesfully');
+        console.log(chalk.green.bold('Contact added succesfully'));
       }
     })
     stmt.finalize();
@@ -26,34 +26,34 @@ var fullName;
 var checkValidNum = (/^[0-9]+$/);
 var number = arr[4];
 if (arr.indexOf('-n') === -1) {
-  console.log('missing -n tag please try again: node add -n <contact name> -p <Phonenumber> '.blue.bold);
+  console.log('missing -n tag please try again: node add -n <contact name> -p <Phonenumber> '.red.bold);
   process.exit();
 } else if (arr.indexOf('-n') !== 0) {
-  console.log('-n argument placed in wrong position');
+  console.log(chalk.red.bold('-n argument placed in wrong position'));
   process.exit();
 } else {
   if (checkValidName.test(firstname) && checkValidName.test(lastname)) {
     fullName = firstname + ' ' + lastname;
   } else {
-    console.log('invalid character present in name');
+    console.log(chalk.red.bold('invalid character present in name'));
   }
 }
 if (arr.indexOf('-p') === -1) {
-  console.log('please include -p tag');
+  console.log(chalk.red.bold('please include -p tag'));
   process.exit();
 } else if (arr.indexOf('-p') !== 3) {
-  console.log('-p argument placed in wrong position');
+  console.log(chalk.red.bold('-p argument placed in wrong position'));
   process.exit();
 } else {
   if (checkValidNum.test(number)) {
     if (number.length !== 11) {
-      console.log('number is invalid');
+      console.log(chalk.bold.red('number is invalid'));
       process.exit();
     } else {
       addContacts(fullName, number);
     }
   } else {
-    console.log('number contains invalid characters: Please try again ');
+    console.log(chalk.bold.red('number contains invalid characters: Please try again '));
     process.exit();
   }
 }

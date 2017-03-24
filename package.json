@@ -1,10 +1,10 @@
 {
-  "name": "new",
-  "version": "9.9.9",
-  "description": "new repo test",
+  "name": "contact manager",
+  "version": "1.0.0",
+  "description": "contact manager ",
   "main": "add.js",
   "scripts": {
-    "test": "t"
+    "test": 
   },
   "author": "",
   "license": "ISC",

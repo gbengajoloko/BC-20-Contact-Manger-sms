@@ -4,13 +4,11 @@ var db = new sqlite3.Database('Database/newdb');
 function deletenum (number){
   console.log(number);
   db.serialize(function() {
-  //db.run("CREATE TABLE IF NOT EXISTS contacts (name TEXT, phoneNumber INT)");
     var stmt=db.prepare('DELETE FROM contacts WHERE phoneNumber= ?');
     stmt.each(`${number}`);
-    console.log('contact deleted succes fully')
+    console.log('contact deleted succesfully')
     });
 }
- //db.close();
 function search (value) {
   var newarr = []
   db.serialize(function () {
@@ -24,7 +22,6 @@ function search (value) {
       }
     })
     smt.finalize();
-    //db.close()
     setTimeout(() => {
       if (newarr.length === 0) {
         console.log('name does not exists in contact list');
@@ -67,4 +64,3 @@ if (arr.length>2) {
 } else if (arr[0]!==undefined) {
   search(arr[0]);
 }
-//db.close()
