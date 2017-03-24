@@ -20,7 +20,7 @@ Installation and setup
 
  - To add contacts run the command:
 
-   - `node add -n <name> -p <phone number>`
+   - `node add -n <first name> <last name> -p <phone number>`
 
 - To view Stored contacts run the command:
 
